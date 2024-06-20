@@ -3,7 +3,7 @@ import cv2
 video = cv2.VideoCapture(0)
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-name = input("Enter Your Name: ")
+id = input("Enter Your ID: ")
 count = 0
 
 while True:
@@ -13,12 +13,12 @@ while True:
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
     for (x, y, w, h) in faces:
         count += 1
-        cv2.imwrite("datasets/User."+str(name)+"."+str(count)+".jpg", gray[y:y+h, x:x+w])
+        cv2.imwrite("datasets/User."+str(id)+"."+str(count)+".jpg", gray[y:y+h, x:x+w])
         cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 5)
         
     cv2.imshow("Face Recognition Test",frame)
 
-    if count > 50:
+    if count > 300:
         break
 
     key_exit = cv2.waitKey(1)
