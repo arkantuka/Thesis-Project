@@ -18,7 +18,7 @@ while True:
         
     cv2.imshow("Face Recognition Test",frame)
 
-    if count > 50:
+    if count > 100:
         break
 
     key_exit = cv2.waitKey(1)
