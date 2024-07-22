@@ -27,7 +27,7 @@ def writeData(courseIDs, course_id):
             writer.writerow(['No','Student ID', 'Name'])
             writer.writerow([1, student_id, name])
             print("====== Write Complete ======")
-        with open('datasets/data/attendance/'+ course_id +'.csv', mode='w', newline='') as csv_file:
+        with open('datasets/data/attendance/'+ course_id +'_attendence.csv', mode='w', newline='') as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow(['Student ID', 'Name', 'Attendence Time'])
     else :

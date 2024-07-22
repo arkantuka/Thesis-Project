@@ -13,7 +13,7 @@ def getStudentNameAndID(course_id):
     return name_list, id_list
 
 def writeAttendance(course_id, student_id, name):
-    with open('datasets/data/attendance/'+ course_id +'.csv', mode='a', newline='') as csv_file:
+    with open('datasets/data/attendance/'+ course_id +'_attendence.csv', mode='a', newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow([student_id, name, datetime.datetime.now().strftime("%H:%M:%S")])
 
