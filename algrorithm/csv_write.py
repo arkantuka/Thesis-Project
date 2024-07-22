@@ -27,6 +27,9 @@ def writeData(courseIDs, course_id):
             writer.writerow(['No','Student ID', 'Name'])
             writer.writerow([1, student_id, name])
             print("====== Write Complete ======")
+        with open('datasets/data/attendance/'+ course_id +'.csv', mode='w', newline='') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow(['Student ID', 'Name', 'Attendence Time'])
     else :
         print("====== Course Found ======")
         with open('datasets/data/student_in_course_detail/'+ course_id +'.csv', mode='a', newline='') as csv_file:
@@ -44,3 +47,8 @@ def runCSVWrite(course_id):
     path = 'datasets/data/student_in_course_detail/'
     course_ids = getCourseIDs(path)
     writeData(course_ids, course_id)
+    add_more = input("Do you want to add more data? (y/n): ")
+    if add_more == 'y':
+        runCSVWrite(course_id)
+    else:
+        print("====== CSV Write Complete ======")

@@ -1,6 +1,6 @@
 import cv2
 import os
-import csv_write as csvw
+import csv
 
 def getStudentNo(course_id, student_id):
     with open('datasets/data/student_in_course_detail/'+ course_id +'.csv', mode='r', newline='') as csv_file:
