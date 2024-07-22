@@ -24,7 +24,7 @@ def runFaceDataCollect(course_id):
         print(course_id, student_no, count)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.03, 5)
+        faces = face_cascade.detectMultiScale(gray, 1.05, 15)
         for (x, y, w, h) in faces:
             count += 1
             faces_folder_path = "datasets/images/"+str(course_id)

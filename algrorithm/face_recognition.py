@@ -30,7 +30,7 @@ def runFaceRecognition(course_id):
         ret,frame = video.read()
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.03, 2)
+        faces = face_cascade.detectMultiScale(gray, 1.05, 10)
         for (x, y, w, h) in faces:
             serial, conf = face_recognizer.predict(gray[y:y+h, x:x+w])
             if(conf > 70 & serial):

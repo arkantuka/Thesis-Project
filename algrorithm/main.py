@@ -5,7 +5,7 @@ import csv_write as csvw
 import csv
 
 course_id = input("Enter Course Code: ")
-mode = input("Enter Mode (1: csv write,2: face collect,3: face train,4: face recognition): ")
+mode = input("1: csv write\n2: face collect\n3: face train\n4: face recognition\n5: clean up attendence\nEnter Mode : ")
 if mode == '1':
     csvw.runCSVWrite(course_id)
 elif mode == '2':
