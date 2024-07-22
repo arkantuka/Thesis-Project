@@ -3,9 +3,6 @@ import numpy as np
 from PIL import Image
 import os
 
-course_id = input("Enter Course Code: ")
-face_recognizer = cv2.face.LBPHFaceRecognizer_create()
-path = 'datasets/images/'+str(course_id)+'/'
 def getImagesData(path): 
     image_paths = [os.path.join(path,f) for f in os.listdir(path)] 
     faces = []
@@ -21,8 +18,13 @@ def getImagesData(path):
         cv2.waitKey(1)
     return ids, faces
 
-IDs, face_data = getImagesData(path)
-face_recognizer.train(face_data, np.array(IDs))
-face_recognizer.write("TrainingData.yml")
-cv2.destroyAllWindows()
-print("====== Training Complete ======")
+def runFaceTrain(course_id):
+    face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+    path = 'datasets/images/'+str(course_id)+'/'
+
+    print("====== Training Started ======")
+    IDs, face_data = getImagesData(path)
+    face_recognizer.train(face_data, np.array(IDs))
+    face_recognizer.write(course_id+"_trainingData.yml")
+    cv2.destroyAllWindows()
+    print("====== Training Complete ======")
