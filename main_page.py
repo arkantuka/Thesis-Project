@@ -1,7 +1,9 @@
 import tkinter as tk
 from algrorithm import first_add_csv_data as add_dt
 from algrorithm import second_face_data_collect as face_coll
-# from algrorithm import fourth_face_recognition as face_rec
+from algrorithm import third_face_training as face_train
+from algrorithm import fourth_face_recognition as face_rec
+from algrorithm import fifth_attendance_time as att
 import input_course_page as icp
 
 class MainPage():
@@ -17,7 +19,7 @@ class MainPage():
         button = tk.Button(window,foreground="blue",background='gray',
                            text=label_name,height=2,width=10,
                            padx=100,
-                           font=("Leelawadee", 10),
+                           font=("Leelawadee", 10, "bold"),
                            command=command)
         button.pack(pady=5)
         
@@ -28,10 +30,12 @@ class MainPage():
         elif(command == 2):
             face_coll.chooseStudentIDpopUp(course_id)
         elif(command == 3):
-            print("Face Train")
+            face_train.runFaceTrain(course_id)
         elif(command == 4):
-            print("Face Recognition")
+            face_rec.runFaceRecognition(course_id)
         elif(command == 5):
+            att.showAttendence(course_id)
+        elif(command == 6):
             icp.FaceRecognitionApp().runMain()
         else:
             print("Error")
@@ -57,7 +61,7 @@ class MainPage():
                               "Student Data Collect",
                               command=lambda: MainPage.button_click(window,self.course_id,1))
         
-        MainPage.createLabel(window,"StudentFace Collect")
+        MainPage.createLabel(window,"Student Face Collect")
         MainPage.createButton(window,
                               "Student Face Collect",
                               command=lambda: MainPage.button_click(window,self.course_id,2))
@@ -71,8 +75,16 @@ class MainPage():
                               "Face Recognition",
                               command=lambda: MainPage.button_click(window,self.course_id,4))
         
+        MainPage.createLabel(window,"Time Attemdance")
         MainPage.createButton(window,
-                              "Back To Input Course ID",
+                              "Time Attemdance",
                               command=lambda: MainPage.button_click(window,self.course_id,5))
+
+        back_button = tk.Button(window,foreground="red",background='white',
+                                text="Back To Input Course ID",
+                                height=2,width=10,padx=80,
+                                font=("Leelawadee", 10, "bold"),
+                                command=lambda: MainPage.button_click(window,self.course_id,6))
+        back_button.pack(pady=10)
         
         window.mainloop()

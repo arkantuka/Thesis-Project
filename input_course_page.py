@@ -1,5 +1,7 @@
 import tkinter as tk
 import main_page as mp
+import datetime as dt
+from tkinter import ttk
 
 class FaceRecognitionApp:
     #Go to main page when submit button is clicked
@@ -23,7 +25,45 @@ class FaceRecognitionApp:
         #Course ID entry
         courseID_entry = tk.Entry(window, font=("Leelawadee", 30))
         courseID_entry.pack()
-
+        
+        #Radio buttons
+        radio_frame = tk.Frame(window)
+        radio_frame.pack(pady=10)
+        tk.Label(radio_frame, text="Select Term :").pack(anchor='w')
+        def setRadioResults():
+            term = var1.get()
+            print(term)
+            
+        var1 = tk.StringVar(radio_frame, "1")  # Create a variable for strings, and initialize the variable
+        tk.Radiobutton(radio_frame, text="First Term", font=("Leelawadee", 12), 
+                       variable=var1, value="1", command=setRadioResults).pack(anchor='w')
+        tk.Radiobutton(radio_frame, text="Second Term", font=("Leelawadee", 12), 
+                       variable=var1, value="2", command=setRadioResults).pack(anchor='w')
+        tk.Radiobutton(radio_frame, text="Summer Term", font=("Leelawadee", 12), 
+                       variable=var1, value="3", command=setRadioResults).pack(anchor='w')
+        
+        def chooseDropdown(e):
+            year_selected = combo.get()
+            print(year_selected)
+        #Dropdown for year
+        tk.Label(radio_frame, text="Select Year :").pack(anchor='w')
+        curretYear = dt.datetime.now().year
+        combo = ttk.Combobox(radio_frame, 
+                             values=[curretYear-5,
+                                     curretYear-4, 
+                                     curretYear-3, 
+                                     curretYear-2,  
+                                     curretYear-1, 
+                                     curretYear, 
+                                     curretYear+1, 
+                                     curretYear+2,
+                                     curretYear+3, 
+                                     curretYear+4, 
+                                     curretYear+5, ])
+        combo.current(5)
+        combo.bind("<<ComboboxSelected>>", chooseDropdown)
+        combo.pack(anchor='w')
+        
         #Submit Button 
         id_submit_button = tk.Button(window, background='black', foreground='green',
                                     text="Submit",

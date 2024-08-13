@@ -1,6 +1,7 @@
 import datetime
 import cv2
 import csv
+import main_page as mp
 
 def getStudentNameAndID(course_id):
     name_list = []
@@ -15,11 +16,12 @@ def getStudentNameAndID(course_id):
 def writeAttendance(course_id, student_id, name):
     with open('datasets/data/attendance/'+ course_id +'_attendence.csv', mode='a', newline='') as csv_file:
         writer = csv.writer(csv_file)
-        writer.writerow([student_id, name, datetime.datetime.now().strftime("%H:%M:%S")])
+        writer.writerow([student_id, name, datetime.datetime.now().strftime("%d/%m/%Y : %H:%M:%S")])
 
 # Main Function
 def runFaceRecognition(course_id):
     all_name, all_id = getStudentNameAndID(course_id)
+    print(all_name, all_id)
     already_Taken = []
 
     video = cv2.VideoCapture(0)
@@ -30,18 +32,20 @@ def runFaceRecognition(course_id):
     while True:
         ret,frame = video.read()
         frame = cv2.resize(frame, (800, 600))
-
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.05, 5)
         for (x, y, w, h) in faces:
             serial, conf = face_recognizer.predict(gray[y:y+h, x:x+w])
+            print(conf, serial)
             if(conf > 60):
-                print(serial)
-                cv2.putText(frame, all_name[serial]+" "+str(conf), (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                # print(all_id.index(serial))
+                index = all_id.index(str(serial))
+                cv2.putText(frame, all_name[index]+" "+"{:.2f}".format(conf), 
+                            (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 5)
-                if all_name[serial] not in already_Taken:
-                    writeAttendance(course_id, all_id[serial], all_name[serial])
-                    already_Taken.append(all_name[serial])
+                if all_name[index] not in already_Taken:
+                    writeAttendance(course_id, all_id[index], all_name[index])
+                    already_Taken.append(all_name[index])
             else:
                 cv2.putText(frame, "Unknown", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 5)
@@ -54,3 +58,4 @@ def runFaceRecognition(course_id):
 
     video.release()
     cv2.destroyAllWindows()
+    mp.MainPage(course_id)
