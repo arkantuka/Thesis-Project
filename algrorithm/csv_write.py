@@ -38,7 +38,7 @@ def writeData(courseIDs, course_id):
             name = input("Enter Name: ")
             numline = sum(1 for line in open('datasets/data/student_in_course_detail/'+ course_id +'.csv'))
             if checkStudentID(course_id, student_id) == False:
-                writer.writerow([numline+1, student_id, name])
+                writer.writerow([numline, student_id, name])
                 print("====== Write Complete ======")
             else:
                 print("====== Error : Student ID Already Exists ======")

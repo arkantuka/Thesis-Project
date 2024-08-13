@@ -22,9 +22,9 @@ def runFaceRecognition(course_id):
     already_Taken = []
 
     video = cv2.VideoCapture(0)
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     face_recognizer = cv2.face.LBPHFaceRecognizer_create()
-    face_recognizer.read(course_id+"_trainingData.yml")
+    face_recognizer.read('datasets/data/train_data/'+course_id+"_trainingData.yml")
 
     while True:
         ret,frame = video.read()

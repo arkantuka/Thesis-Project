@@ -13,18 +13,17 @@ def getStudentNo(course_id, student_id):
 def runFaceDataCollect(course_id):
 
     student_id = input("Enter Student ID: ")
-    student_no = getStudentNo(course_id, student_id)
 
     print("====== Face Data Collection Started ======")
     video = cv2.VideoCapture(0)
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-    count = 0
+    count = 1
     while True:
         ret,frame = video.read()
         print(course_id, student_no, count)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.05, 15)
+        faces = face_cascade.detectMultiScale(gray, 1.03, 2)
         for (x, y, w, h) in faces:
             count += 1
             faces_folder_path = "datasets/images/"+str(course_id)
@@ -35,7 +34,7 @@ def runFaceDataCollect(course_id):
             
         cv2.imshow("Face Recognition Test",frame)
 
-        if count > 50:
+        if count > 100:
             break
 
         key_exit = cv2.waitKey(1)

@@ -21,10 +21,11 @@ def getImagesData(path):
 def runFaceTrain(course_id):
     face_recognizer = cv2.face.LBPHFaceRecognizer_create()
     path = 'datasets/images/'+str(course_id)+'/'
+    save_path = 'datasets/data/train_data/'
 
     print("====== Training Started ======")
     IDs, face_data = getImagesData(path)
     face_recognizer.train(face_data, np.array(IDs))
-    face_recognizer.write(course_id+"_trainingData.yml")
+    face_recognizer.write(save_path+course_id+"_trainingData.yml")
     cv2.destroyAllWindows()
     print("====== Training Complete ======")
