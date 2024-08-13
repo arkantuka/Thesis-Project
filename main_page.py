@@ -2,6 +2,7 @@ import tkinter as tk
 from algrorithm import first_add_csv_data as add_dt
 from algrorithm import second_face_data_collect as face_coll
 # from algrorithm import fourth_face_recognition as face_rec
+import input_course_page as icp
 
 class MainPage():
     
@@ -26,10 +27,12 @@ class MainPage():
             add_dt.runCSVWrite(course_id)
         elif(command == 2):
             face_coll.chooseStudentIDpopUp(course_id)
-        # elif(command == 3):
-        #     print("Face Train")
+        elif(command == 3):
+            print("Face Train")
         elif(command == 4):
             print("Face Recognition")
+        elif(command == 5):
+            icp.FaceRecognitionApp().runMain()
         else:
             print("Error")
         
@@ -68,7 +71,8 @@ class MainPage():
                               "Face Recognition",
                               command=lambda: MainPage.button_click(window,self.course_id,4))
         
-        window.mainloop()
+        MainPage.createButton(window,
+                              "Back To Input Course ID",
+                              command=lambda: MainPage.button_click(window,self.course_id,5))
         
-if __name__ == "__main__":
-    MainPage("517111")
+        window.mainloop()

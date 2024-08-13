@@ -1,7 +1,6 @@
 import datetime
 import cv2
 import csv
-from yunnet import YuNet
 
 def getStudentNameAndID(course_id):
     name_list = []
@@ -55,5 +54,3 @@ def runFaceRecognition(course_id):
 
     video.release()
     cv2.destroyAllWindows()
-    
-runFaceRecognition('517111')

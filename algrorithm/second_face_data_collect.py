@@ -3,6 +3,8 @@ import os
 import csv
 import tkinter as tk
 from tkinter import ttk
+import main_page as mp
+
 
 # Get Student Info           
 def getStudentInfo(path):
@@ -91,15 +93,6 @@ def chooseStudentIDpopUp(course_id):
     submit_button.pack(pady=10)
     window.mainloop()
     
-def messegeBox():
-    window = tk.Tk()
-    window.resizable(False, False)
-    window.title('Alert')
-    window.eval('tk::PlaceWindow . center')
-    tk.messagebox.askokcancel("Enough or not", "Want to collect more?", style='okcancel')
-    print()
-    
-
 def runFaceDataCollect(course_id, student_id):
 
     print("====== Face Data Collection Started ======")
@@ -132,5 +125,9 @@ def runFaceDataCollect(course_id, student_id):
 
     video.release()
     cv2.destroyAllWindows()
-    chooseStudentIDpopUp(course_id)
-
+    result = tk.messagebox.askquestion("Enough or not", "Do you want to add more?") 
+    if result == True:
+        chooseStudentIDpopUp(course_id)
+    else:
+        mp.MainPage(course_id)
+        
