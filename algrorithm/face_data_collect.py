@@ -1,9 +1,13 @@
 import cv2
 import os
 import csv
+import tkinter as tk
 
-def chooseStudentID(course_id):
-    
+def chooseStudentIDpopUp(course_id):
+    window = tk.Tk()
+    window.resizable(False, False)
+    window.title('Student ID for Face Data Collection')
+    window.eval('tk::PlaceWindow . center')
 
 def getStudentNo(course_id, student_id):
     with open('datasets/data/student_in_course_detail/'+ course_id +'.csv', mode='r', newline='') as csv_file:

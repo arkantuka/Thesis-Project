@@ -1,6 +1,7 @@
 import tkinter as tk
 from algrorithm import first_add_csv_data as add_dt
-from algrorithm import fourth_face_recognition as face_rec
+from algrorithm import second_face_data_collect as face_coll
+# from algrorithm import fourth_face_recognition as face_rec
 
 class MainPage():
     
@@ -23,12 +24,12 @@ class MainPage():
         window.destroy()
         if(command == 1):
             add_dt.runCSVWrite(course_id)
-        # elif(command == 2):
-        #     print("Face Data Collect")
+        elif(command == 2):
+            face_coll.chooseStudentIDpopUp(course_id)
         # elif(command == 3):
         #     print("Face Train")
         elif(command == 4):
-            face_rec.runFaceRecognition(course_id)
+            print("Face Recognition")
         else:
             print("Error")
         
@@ -53,14 +54,21 @@ class MainPage():
                               "Student Data Collect",
                               command=lambda: MainPage.button_click(window,self.course_id,1))
         
-        MainPage.createLabel(window,"Face Data Collect")
-        MainPage.createButton(window,"Face Data Collect",lambda: MainPage.createLabel(window,"Face Data Collect"))
+        MainPage.createLabel(window,"StudentFace Collect")
+        MainPage.createButton(window,
+                              "Student Face Collect",
+                              command=lambda: MainPage.button_click(window,self.course_id,2))
         MainPage.createLabel(window,"Face Train")
-        MainPage.createButton(window,"Face Train",lambda: MainPage.createLabel(window,"Face Train"))
+        MainPage.createButton(window,
+                              "Face Train",
+                              command=lambda: MainPage.button_click(window,self.course_id,3))
         #Buttons for face recognition page
         MainPage.createLabel(window,"Face Recognition")
         MainPage.createButton(window,
                               "Face Recognition",
-                              lambda: MainPage.button_click(window,self.course_id,4))
+                              command=lambda: MainPage.button_click(window,self.course_id,4))
         
         window.mainloop()
+        
+if __name__ == "__main__":
+    MainPage("517111")

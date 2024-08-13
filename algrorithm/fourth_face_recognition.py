@@ -31,7 +31,6 @@ def runFaceRecognition(course_id):
     while True:
         ret,frame = video.read()
         frame = cv2.resize(frame, (800, 600))
-        face_recognizer.fit(all_id, all_name)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.05, 5)
