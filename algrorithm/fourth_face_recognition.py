@@ -1,6 +1,7 @@
 import datetime
 import cv2
 import csv
+from yunnet import YuNet
 
 def getStudentNameAndID(course_id):
     name_list = []
@@ -17,6 +18,7 @@ def writeAttendance(course_id, student_id, name):
         writer = csv.writer(csv_file)
         writer.writerow([student_id, name, datetime.datetime.now().strftime("%H:%M:%S")])
 
+# Main Function
 def runFaceRecognition(course_id):
     all_name, all_id = getStudentNameAndID(course_id)
     already_Taken = []
@@ -28,12 +30,14 @@ def runFaceRecognition(course_id):
 
     while True:
         ret,frame = video.read()
+        frame = cv2.resize(frame, (800, 600))
+        face_recognizer.fit(all_id, all_name)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.05, 10)
+        faces = face_cascade.detectMultiScale(gray, 1.05, 5)
         for (x, y, w, h) in faces:
             serial, conf = face_recognizer.predict(gray[y:y+h, x:x+w])
-            if(conf > 70 & serial):
+            if(conf > 60):
                 print(serial)
                 cv2.putText(frame, all_name[serial]+" "+str(conf), (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 5)
@@ -52,4 +56,5 @@ def runFaceRecognition(course_id):
 
     video.release()
     cv2.destroyAllWindows()
-    print("====== Face Recognition Samples Complete ======")
+    
+runFaceRecognition('517111')

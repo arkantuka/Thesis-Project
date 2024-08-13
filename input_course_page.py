@@ -23,9 +23,9 @@ courseID_entry = tk.Entry(window, font=("Leelawadee", 30))
 courseID_entry.pack()
 
 #Submit Button 
-id_submit_button = tk.Button(window, 
-                             text="Submit", 
-                             font=("Leelawadee", 30), 
+id_submit_button = tk.Button(window, background='black', foreground='green',
+                             text="Submit",
+                             font=("Leelawadee", 30, "bold"), 
                              command=lambda: button_click(courseID_entry.get()))
 id_submit_button.pack(padx=20, pady=20)
 

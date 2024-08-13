@@ -2,6 +2,9 @@ import cv2
 import os
 import csv
 
+def chooseStudentID(course_id):
+    
+
 def getStudentNo(course_id, student_id):
     with open('datasets/data/student_in_course_detail/'+ course_id +'.csv', mode='r', newline='') as csv_file:
         reader = csv.reader(csv_file)
@@ -12,15 +15,13 @@ def getStudentNo(course_id, student_id):
 
 def runFaceDataCollect(course_id):
 
-    student_id = input("Enter Student ID: ")
-
     print("====== Face Data Collection Started ======")
     video = cv2.VideoCapture(0)
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     count = 1
     while True:
         ret,frame = video.read()
-        print(course_id, student_no, count)
+        print(course_id, count)
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.03, 2)
@@ -43,4 +44,4 @@ def runFaceDataCollect(course_id):
 
     video.release()
     cv2.destroyAllWindows()
-    print("====== Collecting Samples Complete ======")
+

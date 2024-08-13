@@ -2,6 +2,7 @@ import csv
 import os
 import tkinter as tk
 from tkinter import ttk
+import main_page as mp
 
 # Center Window
 def center_window(window):
@@ -135,27 +136,32 @@ def runCSVWrite(course_id):
     def deleteItems():
         for item in table.selection():
             table.delete(item)
-            
+    
+    # Write Data to CSV and Close Window    
     def write_to_csv():
         updated_data = []
         for i in range(table.get_children().__len__()):
             updated_data.append(table.item(table.get_children()[i])['values'])
         writeData(course_id, updated_data)
-
+        window.destroy()
+        mp.MainPage(course_id)
+    
+    # Create Buttons
+    # Add Button
     add_info = tk.Button(window, 
                       height=2,
                       width=20,
                       text="Add This Infomation", 
                       command=addInfo)
     add_info.pack(pady=10)
-    
+    # Update Button
     update_button = tk.Button(window,
                            height=2,
                            width=20,
                            text="Update This Infomation", 
                            command=update_record)
     update_button.pack(pady=10)
-    
+    # Delete Button
     delete_data = tk.Button(window, 
                          height=2,
                          width=20,
@@ -166,10 +172,11 @@ def runCSVWrite(course_id):
     table.bind('<Delete>', lambda e: deleteItems())
     table.bind("<ButtonRelease-1>", lambda e: select_record())
     
-    write_to_csv = tk.Button(window, foreground="blue",background='gray',
+    write_to_csv = tk.Button(window, foreground="green",background='black',
                          height=2,
-                         width=20,
-                         text="Write To CSV File", 
+                         width=35,
+                         font=("Leelawadee", 15, 'bold'),
+                         text="Write To CSV File and Back to Main Page", 
                          command=write_to_csv)
     write_to_csv.pack(pady=10)
     
